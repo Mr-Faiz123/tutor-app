@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tutor App</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4CAF50">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+
+<body>
+  
+<div class="app">  
+
+<div id="header" class="header">
+  <span>📘 Tutor App</span>
+  <button onclick="toggleTheme()">🌙</button>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<div id="auth" class="auth-container">
+
+  <div class="auth-box">
+
+    <h2>🔐 Welcome Back</h2>
+    <p class="subtitle">Login to continue learning</p>
+
+    <input id="username" placeholder="Email" autocomplete="username">
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+
+    <button onclick="login()">Login</button>
+    <button onclick="signup()" class="secondary">Sign Up</button>
+
+  </div>
+
+</div>
+
+<div id="mainApp" style="display:none;">
+
+  <div id="home" class="screen">
+
+  <div class="section-title">👋 Welcome Back</div>
+
+  <div class="card">
+    <b>🔥 Current Streak</b>
+    <p id="homeStreak">0 days</p>
+  </div>
+
+  <div class="card">
+
+    <div class="section-title">📊 Progress</div>
+
+    <div class="circle">
+      <span id="circleText">0%</span>
+    </div>
+
+    <p id="homeProgress">0 / 0 tasks</p>
+
+  </div>
+
+  <div class="section-title">⚡ Quick Actions</div>
+
+  <div class="card" onclick="showScreen('planner', this)">
+    ➕ Add New Task
+  </div>
+
+  <div class="card" onclick="showScreen('learn', this)">
+    📘 Continue Learning
+  </div>
+
+</div>
+
+<!-- Screens -->
+<div id="learn" class="screen">
+
+  <!-- Progress Card -->
+  <div class="card">
+    <div class="section-title">📊 Your Progress</div>
+    <div class="progress-bar">
+      <div id="progressFill"></div>
+    </div>
+    <p id="progressText">0% completed</p>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="section-title">⚡ Quick Actions</div>
+
+  <div class="card" onclick="showScreen('planner')">
+    🎯 Go to Planner
+  </div>
+
+  <div class="card" onclick="showScreen('chat')">
+    ❓ Ask Doubt
+  </div>
+
+  <!-- Topics -->
+  <div class="section-title">📘 Topics</div>
+
+  <div class="card" onclick="toggle('arrays')">
+    Arrays
+    <p id="arrays" style="display:none;">Stores multiple values using index.</p>
+  </div>
+
+  <div class="card" onclick="toggle('loops')">
+    Loops
+    <p id="loops" style="display:none;">Repeats execution.</p>
+  </div>
+
+</div>
+
+<div id="chat" class="screen">
+  <h3>❓ Ask Doubt</h3>
+
+  <input id="msg" placeholder="Ask something">
+  <button onclick="reply()">Send</button>
+
+  <p id="response"></p>
+</div>
+
+<div id="planner" class="screen">
+
+  <div class="section-title">🎯 Planner</div>
+
+  <input id="task" placeholder="Enter task">
+
+  <select id="priority">
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+
+  <button onclick="addTask()">Add</button>
+
+  <!-- ✅ Progress bar (correct place) -->
+  <div class="progress-bar">
+    <div id="progressFill"></div>
+  </div>
+
+  <p id="progress"></p>
+
+  <ul id="list"></ul>
+
+</div>
+
+<div id="streak" class="screen">
+
+  <div class="section-title">🔥 Streak</div>
+
+  <div class="card">
+    <b>Your Current Streak</b>
+    <p id="count">0</p>
+  </div>
+
+  <div class="card">
+    <button onclick="increase()">Mark Today Complete ✅</button>
+  </div>
+
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <button onclick="showScreen('home', this)">🏠</button>
+  <button onclick="showScreen('learn', this)">📘</button>
+  <button onclick="showScreen('planner', this)">🎯</button>
+  <button onclick="showScreen('streak', this)">🔥</button>
+</div>
+
+</div>
+<script src="app.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+</div>
+</body>
+</html>
